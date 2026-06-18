@@ -1,167 +1,174 @@
-# Notes Manager (Ipopiads Assignment)
+# Notes Manager – Flutter Developer Assessment
 
-## Project overview
+## Overview
 
-Simple notes app built with Flutter demonstrating Clean Architecture, Firebase Authentication, Cloud Firestore CRUD (real-time), and GetX state management. The project implements signup/login, notes CRUD, and a minimal responsive UI suitable for the assignment.
+Notes Manager is a Flutter application built using Firebase Authentication and Cloud Firestore. The application allows users to register, log in, and manage their personal notes with real-time synchronization.
 
-## Architecture & State Management
+This project was developed as part of the Flutter Developer Assessment.
 
-- Clean Architecture: `presentation`, `domain`, and `data` layers under each feature.
-- State management: `GetX` for simple controllers, navigation, and reactivity.
-- Dependency injection: `Get.put` (GetX) for simple controllers and services.
+---
 
-Core structure (partial):
+## Features
 
+### Authentication
+
+- User Registration
+- User Login
+- User Logout
+- Form Validation
+- Firebase Authentication Integration
+
+### Notes Management
+
+- Create Notes
+- View Notes
+- Edit Notes
+- Delete Notes
+- User-Specific Notes
+- Real-Time Firestore Updates
+
+### Dashboard
+
+- Welcome Message
+- Total Notes Count
+- Notes Listing
+- Logout Functionality
+
+---
+
+## Tech Stack
+
+- Flutter 3.x
+- Dart (Null Safety)
+- Firebase Authentication
+- Cloud Firestore
+- GetX State Management
+- Clean Architecture
+
+---
+
+## Project Structure
+
+```text
 lib/
 ├── core/
+│   ├── constants/
+│   ├── services/
+│   └── utils/
+│
 ├── features/
-│ ├── auth/
-│ └── notes/
+│   ├── auth/
+│   │   └── presentation/
+│   │
+│   └── notes/
+│       ├── domain/
+│       └── presentation/
+│
 ├── injection.dart
-├── firebase_options.dart (generated)
+├── firebase_options.dart
 └── main.dart
+```
 
-## Dependencies
+---
 
-See `pubspec.yaml`. Key packages used:
+## Firebase Configuration
 
-- firebase_core, firebase_auth, cloud_firestore
-- get
-- get_it
+### Authentication
 
-## Prerequisites
+Enable:
 
-- Flutter SDK (stable) installed
-- `firebase` CLI (optional but recommended) — used by `flutterfire`
-- `dart` and `flutter` on PATH
+- Email/Password Authentication
 
-## Firebase setup (recommended steps)
+### Firestore Collections
 
-1. Create a Firebase project named `Ipopiads Notes App` at https://console.firebase.google.com/.
-2. Enable Authentication -> Sign-in method -> Email/Password (enable).
-3. Create a Firestore database (Native mode). You may start in test mode for development.
-4. Add Android and/or iOS apps to the Firebase project.
-   - Android `applicationId` (package name) commonly `com.example.notes_manager` — confirm in `android/app/build.gradle` or `android/app/src/main/AndroidManifest.xml`.
-   - Download `google-services.json` into `android/app/`.
-   - For iOS, add the iOS bundle id (Runner) and download `GoogleService-Info.plist` into `ios/Runner/`.
+#### users
 
-### Generate `firebase_options.dart` (recommended)
+```json
+{
+  "name": "User Name",
+  "email": "user@example.com"
+}
+```
 
-Install and run the FlutterFire CLI to generate platform config and `lib/firebase_options.dart`:
+#### notes
+
+```json
+{
+  "userId": "USER_ID",
+  "title": "Sample Note",
+  "description": "Sample Description",
+  "createdAt": "Timestamp",
+  "updatedAt": "Timestamp"
+}
+```
+
+---
+
+## Setup Instructions
+
+### Clone Repository
+
+```bash
+git clone https://github.com/Karthikr8642/notes-manager.git
+cd notes-manager
+```
+
+### Install Dependencies
 
 ```bash
 flutter pub get
-dart pub global activate flutterfire_cli
-firebase login
-flutterfire configure --project <YOUR_FIREBASE_PROJECT_ID>
 ```
 
-The `flutterfire configure` command will detect platforms and generate `lib/firebase_options.dart`. Replace `<YOUR_FIREBASE_PROJECT_ID>` with the project id from the Firebase console if you prefer to pass it explicitly.
-
-If you don't run `flutterfire configure`, the app contains a placeholder `lib/firebase_options.dart` and Firebase initialization will silently skip on environments without generated options.
-
-## Run the app (development)
-
-1. Install packages:
+### Configure Firebase
 
 ```bash
-flutter pub get
+flutterfire configure
 ```
 
-2. Run on a connected device/emulator:
+### Run Application
 
 ```bash
 flutter run
 ```
 
-## Testing & analysis
+---
 
-Run unit/widget tests (if any):
-
-```bash
-flutter test
-```
-
-Static analysis:
-
-```bash
-flutter analyze
-```
-
-## Build release APK
-
-Build a release APK (unsigned debug signing by default):
+## Build APK
 
 ```bash
 flutter build apk --release
 ```
 
-Release APK path: `build/app/outputs/flutter-apk/app-release.apk` (or `app-release.aab` for app bundle builds).
+Generated APK:
 
-To publish a signed APK, follow Android signing instructions: create a keystore, add signing config to `android/app/build.gradle`, and build.
-
-## Notes on Firestore structure (as required)
-
-- `users` collection: stores user profiles created at signup.
-- `notes` collection: each document contains `{ userId, title, description, createdAt, updatedAt }`.
-
-Example add note:
-
-```dart
-FirebaseFirestore.instance.collection('notes').add({
-  'title': title,
-  'description': description,
-  'userId': uid,
-  'createdAt': FieldValue.serverTimestamp(),
-  'updatedAt': FieldValue.serverTimestamp(),
-});
+```text
+build/app/outputs/flutter-apk/app-release.apk
 ```
-
-## Assumptions
-
-- Default Android package id is `com.example.notes_manager` unless changed by the developer.
-- Firestore rules are permissive during development (test mode); secure rules should be applied for production.
-- The generated `firebase_options.dart` will be created by `flutterfire configure` — developer must run this step locally.
-
-## Submission / APK
-
-- Provide the GitHub repository link and the release APK located at `build/app/outputs/flutter-apk/app-release.apk` after building.
-
-## Interview talking points
-
-- Why GetX: lightweight controllers, simple dependency injection, and built-in navigation and reactivity.
-- Why StreamBuilder: real-time Firestore updates, efficient UI updates.
-- Clean Architecture: easier to maintain and scale.
-
-## Next steps I can help with
-
-- Wire remaining UI with `NotesController` and add Add/Edit note screens.
-- Add unit and widget tests for controllers and repositories.
-- Create CI scripts or workspace-specific setup instructions.
 
 ---
 
-File locations to inspect:
+## Implemented Requirements
 
-- [lib/main.dart](lib/main.dart#L1)
-- [lib/firebase_options.dart](lib/firebase_options.dart#L1)
-- [lib/features/auth/presentation/signup_page.dart](lib/features/auth/presentation/signup_page.dart#L1)
-- [lib/features/notes/presentation/notes_page.dart](lib/features/notes/presentation/notes_page.dart#L1)
+| Requirement             | Status |
+| ----------------------- | ------ |
+| Signup                  | ✅     |
+| Login                   | ✅     |
+| Logout                  | ✅     |
+| Create Note             | ✅     |
+| View Notes              | ✅     |
+| Edit Note               | ✅     |
+| Delete Note             | ✅     |
+| Firebase Authentication | ✅     |
+| Cloud Firestore         | ✅     |
+| User Specific Notes     | ✅     |
+| Real-Time Updates       | ✅     |
+| Responsive UI           | ✅     |
+| Clean Architecture      | ✅     |
 
-# notes_manager
+---
 
-A new Flutter project.
+## Author
 
-## Getting Started
+Karthik R
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Flutter Developer
