@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'auth_controller.dart';
+import '../../../core/constants/app_routes.dart';
 import '../../../core/utils/validators.dart';
 
 class LoginPage extends StatefulWidget {
@@ -62,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                                 if (!_formKey.currentState!.validate()) return;
                                 await ctrl.signIn(_emailCtrl.text.trim(), _pwdCtrl.text.trim());
                                 if (ctrl.user.value != null) {
-                                  Get.offAllNamed('/notes');
+                                  Get.offAllNamed(AppRoutes.home);
                                 } else if (ctrl.error.value != null) {
                                   Get.snackbar('Sign in error', ctrl.error.value!, snackPosition: SnackPosition.BOTTOM);
                                 }

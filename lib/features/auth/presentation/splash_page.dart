@@ -20,7 +20,7 @@ class _SplashPageState extends State<SplashPage> {
       final auth = Get.find<AuthController>();
 
       if (auth.user.value != null) {
-        Get.offAllNamed(AppRoutes.notes);
+        Get.offAllNamed(AppRoutes.home);
       } else {
         Get.offAllNamed(AppRoutes.login);
       }

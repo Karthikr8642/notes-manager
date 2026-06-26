@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'auth_controller.dart';
+import '../../../core/constants/app_routes.dart';
 import '../../../core/utils/validators.dart';
 
 class SignupPage extends StatefulWidget {
@@ -66,7 +67,7 @@ class _SignupPageState extends State<SignupPage> {
                                 if (!_formKey.currentState!.validate()) return;
                                 await ctrl.signUp(_nameCtrl.text.trim(), _emailCtrl.text.trim(), _pwdCtrl.text.trim());
                                 if (ctrl.user.value != null) {
-                                  Get.offAllNamed('/notes');
+                                  Get.offAllNamed(AppRoutes.home);
                                 } else if (ctrl.error.value != null) {
                                   Get.snackbar('Sign up error', ctrl.error.value!, snackPosition: SnackPosition.BOTTOM);
                                 }
