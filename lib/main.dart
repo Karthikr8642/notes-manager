@@ -10,6 +10,7 @@ import 'features/notes/presentation/notes_page.dart';
 import 'features/notes/presentation/add_edit_note_page.dart';
 import 'features/expenses/presentation/expenses_page.dart';
 import 'features/expenses/presentation/add_edit_expense_page.dart';
+import 'features/home/presentation/home_page.dart';
 import 'injection.dart';
 import 'firebase_options.dart';
 import 'features/auth/presentation/auth_controller.dart';
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/splash', page: () => const SplashPage()),
         GetPage(name: AppRoutes.login, page: () => const LoginPage()),
         GetPage(name: '/signup', page: () => const SignupPage()),
+        GetPage(name: AppRoutes.home, page: () => HomePage()),
         GetPage(name: AppRoutes.notes, page: () => const NotesPage()),
         GetPage(name: '/note', page: () => const AddEditNotePage()),
         GetPage(name: AppRoutes.expenses, page: () => const ExpensesPage()),
