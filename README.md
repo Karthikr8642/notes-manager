@@ -166,13 +166,15 @@ build/app/outputs/flutter-apk/app-release.apk
 | Clean Architecture      | ✅     |
 
 ---
+
 qq
+
 ## Author
 
 Karthik R
 
 Flutter Developer
- 
+
 ---
 
 **Recent Push Summary (commit: 1aff571)**
@@ -205,21 +207,28 @@ Flutter Developer
   - An actionable implementation guide (`AI_FINANCIAL_OS_IMPLEMENTATION.md`) provides step-by-step instructions for the immediate MVP: SMS parser → Gmail parser → Notification listener.
 
 **Next recommended steps (priority):**
+
 - Implement the SMS parser (permission flow, SMS reading, regex extraction, auto-create rules).
 - Implement Gmail OAuth and invoice parsing.
 - Wire Android `NotificationListenerService` to Flutter and feed notifications into the parsing pipeline.
 - Build a `Pending Review` UI for medium-confidence parsed transactions and a `Unified Timeline` UI.
 
 **How to run / test locally:**
+
 1. Install dependencies:
+
 ```bash
 flutter pub get
 ```
+
 2. Configure Firebase (if not done):
+
 ```bash
 flutterfire configure
 ```
+
 3. Run the app:
+
 ```bash
 flutter run
 ```
