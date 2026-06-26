@@ -39,6 +39,13 @@ class _NotesPageState extends State<NotesPage> {
         title: const Text('Notes'),
         actions: [
           IconButton(
+            icon: const Icon(Icons.account_balance_wallet),
+            tooltip: 'Wallet',
+            onPressed: () {
+              Get.toNamed(AppRoutes.expenses);
+            },
+          ),
+          IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () async {
               await authController.signOut();

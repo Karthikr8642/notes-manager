@@ -63,17 +63,14 @@ class NotesController extends GetxController {
     print('========================');
 
     try {
-      final docRef = await _fire.collection('notes').add({
+      await _fire.collection('notes').add({
         'title': title,
         'description': description,
         'userId': uid,
         'createdAt': FieldValue.serverTimestamp(),
         'updatedAt': FieldValue.serverTimestamp(),
       });
-
-      print('DOC ID: ${docRef.id}');
     } catch (e) {
-      print(e);
       error.value = e.toString();
     } finally {
       loading.value = false;
